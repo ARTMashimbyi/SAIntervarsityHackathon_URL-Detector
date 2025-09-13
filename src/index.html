@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>URL Detective - Validate URLs & Play Game</title>
+    <title>URL Guardian - Cybersecurity Education Game</title>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
@@ -22,6 +22,7 @@
         --success: #2ecc71;
         --danger: #e74c3c;
         --warning: #f39c12;
+        --info: #3498db;
         --dark: #2c3e50;
         --light: #ecf0f1;
       }
@@ -88,6 +89,16 @@
 
       .tab-content {
         display: none;
+        animation: fadeIn 0.5s;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
       }
 
       .tab-content.active {
@@ -167,6 +178,17 @@
         box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
       }
 
+      .btn-secondary {
+        background: var(--secondary);
+        color: white;
+      }
+
+      .btn-secondary:hover {
+        background: #9566d8;
+        transform: translateY(-3px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      }
+
       .result-box {
         padding: 20px;
         border-radius: 10px;
@@ -207,6 +229,11 @@
         padding: 20px;
         background: rgba(236, 240, 241, 0.5);
         border-radius: 10px;
+        transition: transform 0.3s;
+      }
+
+      .feature:hover {
+        transform: translateY(-5px);
       }
 
       .feature-icon {
@@ -345,6 +372,140 @@
         transition: width 0.3s;
       }
 
+      /* Profile & Progress Styles */
+      .profile-container {
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        gap: 20px;
+      }
+
+      .profile-card {
+        text-align: center;
+        padding: 20px;
+      }
+
+      .avatar {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        background: var(--primary);
+        margin: 0 auto 15px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        font-size: 3rem;
+      }
+
+      .stats {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+        margin-top: 20px;
+      }
+
+      .stat {
+        background: rgba(236, 240, 241, 0.5);
+        padding: 15px;
+        border-radius: 10px;
+        text-align: center;
+      }
+
+      .stat-value {
+        font-size: 1.8rem;
+        font-weight: bold;
+        color: var(--primary);
+      }
+
+      .stat-label {
+        font-size: 0.9rem;
+        color: #7f8c8d;
+      }
+
+      .badges {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 20px;
+      }
+
+      .badge {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        background: var(--info);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        font-size: 1.5rem;
+        position: relative;
+      }
+
+      .badge.locked {
+        background: #bdc3c7;
+        color: #7f8c8d;
+      }
+
+      .badge-tooltip {
+        position: absolute;
+        bottom: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+        background: var(--dark);
+        color: white;
+        padding: 5px 10px;
+        border-radius: 5px;
+        font-size: 0.8rem;
+        white-space: nowrap;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s;
+      }
+
+      .badge:hover .badge-tooltip {
+        opacity: 1;
+      }
+
+      /* Learning Center Styles */
+      .learning-modules {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 20px;
+      }
+
+      .module {
+        background: #f8f9fa;
+        border-radius: 10px;
+        padding: 20px;
+        transition: transform 0.3s;
+      }
+
+      .module:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+      }
+
+      .module-icon {
+        font-size: 2rem;
+        color: var(--primary);
+        margin-bottom: 15px;
+      }
+
+      .module-completion {
+        height: 5px;
+        background: #e0e0e0;
+        border-radius: 5px;
+        margin-top: 15px;
+        overflow: hidden;
+      }
+
+      .module-progress {
+        height: 100%;
+        background: var(--success);
+        width: 0%;
+      }
+
       /* Responsive Design */
       @media (max-width: 768px) {
         header {
@@ -367,6 +528,10 @@
 
         h2 {
           font-size: 1.8rem;
+        }
+
+        .profile-container {
+          grid-template-columns: 1fr;
         }
       }
 
@@ -393,14 +558,63 @@
           padding: 12px 25px;
         }
       }
+
+      /* Animations */
+      @keyframes pulse {
+        0% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.05);
+        }
+        100% {
+          transform: scale(1);
+        }
+      }
+
+      .pulse {
+        animation: pulse 2s infinite;
+      }
+
+      /* Notification */
+      .notification {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        padding: 15px 20px;
+        border-radius: 10px;
+        color: white;
+        font-weight: bold;
+        z-index: 1000;
+        opacity: 0;
+        transform: translateX(100%);
+        transition: all 0.3s;
+      }
+
+      .notification.show {
+        opacity: 1;
+        transform: translateX(0);
+      }
+
+      .notification.success {
+        background: var(--success);
+      }
+
+      .notification.error {
+        background: var(--danger);
+      }
+
+      .notification.info {
+        background: var(--info);
+      }
     </style>
   </head>
   <body>
     <div class="container">
       <header>
         <div class="logo">
-          <i class="fas fa-link"></i>
-          <span>URL Detective</span>
+          <i class="fas fa-shield-alt"></i>
+          <span>URL Guardian</span>
         </div>
         <nav>
           <ul>
@@ -409,7 +623,11 @@
                 >URL Checker</a
               >
             </li>
-            <li><a href="#" class="nav-link" data-tab="game">URL Game</a></li>
+            <li>
+              <a href="#" class="nav-link" data-tab="game">Phishing Game</a>
+            </li>
+            <li><a href="#" class="nav-link" data-tab="learn">Learn</a></li>
+            <li><a href="#" class="nav-link" data-tab="profile">Profile</a></li>
           </ul>
         </nav>
       </header>
@@ -418,8 +636,8 @@
         <!-- URL Checker Tab -->
         <div class="tab-content active" id="checker">
           <div class="card">
-            <h2>URL Validation Tool</h2>
-            <p>Check if your URLs are valid and secure</p>
+            <h2>Advanced URL Validation Tool</h2>
+            <p>Check if URLs are valid, secure, and not suspicious</p>
 
             <div class="input-group">
               <input
@@ -428,7 +646,7 @@
                 placeholder="Enter URL to validate (e.g., https://example.com)"
               />
               <button class="btn-primary" id="validate-btn">
-                Validate URL
+                <i class="fas fa-search"></i> Analyze URL
               </button>
             </div>
 
@@ -441,23 +659,34 @@
                 <div class="feature-icon">
                   <i class="fas fa-lock"></i>
                 </div>
-                <h3>Protocol Check</h3>
-                <p>Validates HTTPS/HTTP protocols</p>
+                <h3>Security Scan</h3>
+                <p>
+                  Detects suspicious patterns and potential phishing attempts
+                </p>
               </div>
               <div class="feature">
                 <div class="feature-icon">
-                  <i class="fas fa-globe"></i>
+                  <i class="fas fa-brain"></i>
                 </div>
-                <h3>Domain Validation</h3>
-                <p>Checks domain format and TLD</p>
+                <h3>AI Analysis</h3>
+                <p>Uses machine learning to identify emerging threats</p>
               </div>
               <div class="feature">
                 <div class="feature-icon">
-                  <i class="fas fa-shield-alt"></i>
+                  <i class="fas fa-history"></i>
                 </div>
-                <h3>Security Analysis</h3>
-                <p>Detects suspicious patterns</p>
+                <h3>History Tracking</h3>
+                <p>Maintains a record of your scanned URLs for reference</p>
               </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <h2>Recent Scans</h2>
+            <div id="scan-history">
+              <p class="text-center">
+                No scan history yet. URLs you scan will appear here.
+              </p>
             </div>
           </div>
         </div>
@@ -465,16 +694,18 @@
         <!-- Game Tab -->
         <div class="tab-content" id="game">
           <div class="card">
-            <h2>URL Detective Game</h2>
+            <h2>Phishing Detection Game</h2>
 
             <div class="instructions">
               <h3>How to Play:</h3>
               <ul>
                 <li>Select the difficulty level (Easy, Medium, Hard)</li>
                 <li>Click START to begin the game</li>
-                <li>You'll see multiple URLs - one is invalid</li>
-                <li>Click on the invalid URL as quickly as possible</li>
-                <li>Score is based on how fast you identify the invalid URL</li>
+                <li>
+                  You'll see multiple URLs - identify the phishing attempt
+                </li>
+                <li>Click on the suspicious URL as quickly as possible</li>
+                <li>Score is based on speed and accuracy</li>
                 <li>Complete all 5 stages in each difficulty level</li>
               </ul>
             </div>
@@ -520,12 +751,494 @@
               </div>
             </div>
           </div>
+
+          <div class="card">
+            <h2>Leaderboard</h2>
+            <div id="leaderboard">
+              <table style="width: 100%; border-collapse: collapse">
+                <thead>
+                  <tr style="border-bottom: 2px solid #ddd">
+                    <th style="text-align: left; padding: 10px">Player</th>
+                    <th style="text-align: center; padding: 10px">Level</th>
+                    <th style="text-align: right; padding: 10px">Score</th>
+                  </tr>
+                </thead>
+                <tbody id="leaderboard-body">
+                  <tr>
+                    <td colspan="3" style="text-align: center; padding: 20px">
+                      No scores yet. Be the first!
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- Learning Center Tab -->
+        <div class="tab-content" id="learn">
+          <div class="card">
+            <h2>Cybersecurity Learning Center</h2>
+            <p>Learn to identify and protect yourself from online threats</p>
+
+            <div class="learning-modules">
+              <div class="module">
+                <div class="module-icon">
+                  <i class="fas fa-fish"></i>
+                </div>
+                <h3>Phishing Awareness</h3>
+                <p>
+                  Learn how to identify phishing attempts and suspicious URLs
+                </p>
+                <div class="module-completion">
+                  <div class="module-progress" style="width: 25%"></div>
+                </div>
+              </div>
+
+              <div class="module">
+                <div class="module-icon">
+                  <i class="fas fa-mask"></i>
+                </div>
+                <h3>Social Engineering</h3>
+                <p>
+                  Understand how attackers manipulate people into revealing
+                  sensitive information
+                </p>
+                <div class="module-completion">
+                  <div class="module-progress" style="width: 10%"></div>
+                </div>
+              </div>
+
+              <div class="module">
+                <div class="module-icon">
+                  <i class="fas fa-lock"></i>
+                </div>
+                <h3>Secure Browsing</h3>
+                <p>
+                  Best practices for staying safe while browsing the internet
+                </p>
+                <div class="module-completion">
+                  <div class="module-progress" style="width: 5%"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <h2>Daily Challenge</h2>
+            <div id="daily-challenge">
+              <p>Identify the phishing URL in the set below:</p>
+              <div class="url-container">
+                <div class="url-option">https://secure-paypal.com/login</div>
+                <div class="url-option">https://www.paypal.com/signin</div>
+                <div class="url-option">https://account.paypal.com</div>
+              </div>
+              <div class="controls" style="margin-top: 20px">
+                <button class="btn-secondary">Submit Answer</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Profile Tab -->
+        <div class="tab-content" id="profile">
+          <div class="profile-container">
+            <div class="card profile-card">
+              <div class="avatar">
+                <i class="fas fa-user"></i>
+              </div>
+              <h3>Cyber Defender</h3>
+              <p>Level 5 Security Analyst</p>
+
+              <div class="stats">
+                <div class="stat">
+                  <div class="stat-value">12</div>
+                  <div class="stat-label">Days Streak</div>
+                </div>
+                <div class="stat">
+                  <div class="stat-value">85%</div>
+                  <div class="stat-label">Accuracy</div>
+                </div>
+              </div>
+
+              <h4 style="margin-top: 20px">Badges</h4>
+              <div class="badges">
+                <div class="badge">
+                  <i class="fas fa-medal"></i>
+                  <div class="badge-tooltip">First Scan</div>
+                </div>
+                <div class="badge">
+                  <i class="fas fa-shield-alt"></i>
+                  <div class="badge-tooltip">Phishing Expert</div>
+                </div>
+                <div class="badge locked">
+                  <i class="fas fa-fire"></i>
+                  <div class="badge-tooltip">7-Day Streak</div>
+                </div>
+                <div class="badge locked">
+                  <i class="fas fa-crown"></i>
+                  <div class="badge-tooltip">Master Analyst</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card">
+              <h2>Progress Overview</h2>
+
+              <div class="stats" style="grid-template-columns: repeat(3, 1fr)">
+                <div class="stat">
+                  <div class="stat-value">47</div>
+                  <div class="stat-label">URLs Scanned</div>
+                </div>
+                <div class="stat">
+                  <div class="stat-value">36</div>
+                  <div class="stat-label">Games Played</div>
+                </div>
+                <div class="stat">
+                  <div class="stat-value">92%</div>
+                  <div class="stat-label">Success Rate</div>
+                </div>
+              </div>
+
+              <h3 style="margin-top: 20px">Weekly Activity</h3>
+              <div
+                style="
+                  display: flex;
+                  height: 150px;
+                  align-items: flex-end;
+                  gap: 10px;
+                  margin-top: 15px;
+                "
+              >
+                <div
+                  style="
+                    flex: 1;
+                    background: #e0e0e0;
+                    border-radius: 5px;
+                    height: 30%;
+                    position: relative;
+                  "
+                >
+                  <div
+                    style="
+                      position: absolute;
+                      bottom: 0;
+                      left: 0;
+                      right: 0;
+                      background: var(--primary);
+                      border-radius: 5px;
+                      height: 30%;
+                    "
+                  ></div>
+                  <div
+                    style="
+                      position: absolute;
+                      bottom: 0;
+                      width: 100%;
+                      text-align: center;
+                      padding: 5px 0;
+                      font-size: 0.8rem;
+                    "
+                  >
+                    Mon
+                  </div>
+                </div>
+                <div
+                  style="
+                    flex: 1;
+                    background: #e0e0e0;
+                    border-radius: 5px;
+                    height: 30%;
+                    position: relative;
+                  "
+                >
+                  <div
+                    style="
+                      position: absolute;
+                      bottom: 0;
+                      left: 0;
+                      right: 0;
+                      background: var(--primary);
+                      border-radius: 5px;
+                      height: 60%;
+                    "
+                  ></div>
+                  <div
+                    style="
+                      position: absolute;
+                      bottom: 0;
+                      width: 100%;
+                      text-align: center;
+                      padding: 5px 0;
+                      font-size: 0.8rem;
+                    "
+                  >
+                    Tue
+                  </div>
+                </div>
+                <div
+                  style="
+                    flex: 1;
+                    background: #e0e0e0;
+                    border-radius: 5px;
+                    height: 30%;
+                    position: relative;
+                  "
+                >
+                  <div
+                    style="
+                      position: absolute;
+                      bottom: 0;
+                      left: 0;
+                      right: 0;
+                      background: var(--primary);
+                      border-radius: 5px;
+                      height: 45%;
+                    "
+                  ></div>
+                  <div
+                    style="
+                      position: absolute;
+                      bottom: 0;
+                      width: 100%;
+                      text-align: center;
+                      padding: 5px 0;
+                      font-size: 0.8rem;
+                    "
+                  >
+                    Wed
+                  </div>
+                </div>
+                <div
+                  style="
+                    flex: 1;
+                    background: #e0e0e0;
+                    border-radius: 5px;
+                    height: 30%;
+                    position: relative;
+                  "
+                >
+                  <div
+                    style="
+                      position: absolute;
+                      bottom: 0;
+                      left: 0;
+                      right: 0;
+                      background: var(--primary);
+                      border-radius: 5px;
+                      height: 80%;
+                    "
+                  ></div>
+                  <div
+                    style="
+                      position: absolute;
+                      bottom: 0;
+                      width: 100%;
+                      text-align: center;
+                      padding: 5px 0;
+                      font-size: 0.8rem;
+                    "
+                  >
+                    Thu
+                  </div>
+                </div>
+                <div
+                  style="
+                    flex: 1;
+                    background: #e0e0e0;
+                    border-radius: 5px;
+                    height: 30%;
+                    position: relative;
+                  "
+                >
+                  <div
+                    style="
+                      position: absolute;
+                      bottom: 0;
+                      left: 0;
+                      right: 0;
+                      background: var(--primary);
+                      border-radius: 5px;
+                      height: 95%;
+                    "
+                  ></div>
+                  <div
+                    style="
+                      position: absolute;
+                      bottom: 0;
+                      width: 100%;
+                      text-align: center;
+                      padding: 5px 0;
+                      font-size: 0.8rem;
+                    "
+                  >
+                    Fri
+                  </div>
+                </div>
+                <div
+                  style="
+                    flex: 1;
+                    background: #e0e0e0;
+                    border-radius: 5px;
+                    height: 30%;
+                    position: relative;
+                  "
+                >
+                  <div
+                    style="
+                      position: absolute;
+                      bottom: 0;
+                      left: 0;
+                      right: 0;
+                      background: var(--primary);
+                      border-radius: 5px;
+                      height: 65%;
+                    "
+                  ></div>
+                  <div
+                    style="
+                      position: absolute;
+                      bottom: 0;
+                      width: 100%;
+                      text-align: center;
+                      padding: 5px 0;
+                      font-size: 0.8rem;
+                    "
+                  >
+                    Sat
+                  </div>
+                </div>
+                <div
+                  style="
+                    flex: 1;
+                    background: #e0e0e0;
+                    border-radius: 5px;
+                    height: 30%;
+                    position: relative;
+                  "
+                >
+                  <div
+                    style="
+                      position: absolute;
+                      bottom: 0;
+                      left: 0;
+                      right: 0;
+                      background: var(--primary);
+                      border-radius: 5px;
+                      height: 40%;
+                    "
+                  ></div>
+                  <div
+                    style="
+                      position: absolute;
+                      bottom: 0;
+                      width: 100%;
+                      text-align: center;
+                      padding: 5px 0;
+                      font-size: 0.8rem;
+                    "
+                  >
+                    Sun
+                  </div>
+                </div>
+              </div>
+
+              <h3 style="margin-top: 20px">Achievements</h3>
+              <div
+                style="background: #f8f9fa; padding: 15px; border-radius: 10px"
+              >
+                <div
+                  style="
+                    display: flex;
+                    align-items: center;
+                    margin-bottom: 10px;
+                  "
+                >
+                  <div
+                    style="
+                      width: 40px;
+                      height: 40px;
+                      background: var(--success);
+                      border-radius: 50%;
+                      display: flex;
+                      justify-content: center;
+                      align-items: center;
+                      color: white;
+                      margin-right: 15px;
+                    "
+                  >
+                    <i class="fas fa-check"></i>
+                  </div>
+                  <div>
+                    <h4 style="margin: 0">First Blood</h4>
+                    <p style="margin: 0; font-size: 0.9rem">
+                      Complete your first phishing detection game
+                    </p>
+                  </div>
+                </div>
+                <div
+                  style="
+                    display: flex;
+                    align-items: center;
+                    margin-bottom: 10px;
+                  "
+                >
+                  <div
+                    style="
+                      width: 40px;
+                      height: 40px;
+                      background: var(--success);
+                      border-radius: 50%;
+                      display: flex;
+                      justify-content: center;
+                      align-items: center;
+                      color: white;
+                      margin-right: 15px;
+                    "
+                  >
+                    <i class="fas fa-check"></i>
+                  </div>
+                  <div>
+                    <h4 style="margin: 0">Quick Draw</h4>
+                    <p style="margin: 0; font-size: 0.9rem">
+                      Identify a phishing URL in under 3 seconds
+                    </p>
+                  </div>
+                </div>
+                <div style="display: flex; align-items: center">
+                  <div
+                    style="
+                      width: 40px;
+                      height: 40px;
+                      background: #bdc3c7;
+                      border-radius: 50%;
+                      display: flex;
+                      justify-content: center;
+                      align-items: center;
+                      color: #7f8c8d;
+                      margin-right: 15px;
+                    "
+                  >
+                    <i class="fas fa-lock"></i>
+                  </div>
+                  <div>
+                    <h4 style="margin: 0">Perfect Week</h4>
+                    <p style="margin: 0; font-size: 0.9rem">
+                      Play for 7 consecutive days
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </main>
     </div>
 
+    <div class="notification" id="notification">Notification message</div>
+
     <script>
-      // URL Validation Functionality
+      // Enhanced URL Validation Functionality
       function validateURL(url) {
         try {
           // Basic validation
@@ -559,19 +1272,55 @@
             };
           }
 
-          // Check for suspicious characters
-          if (url.includes("@@") || url.includes("//") || url.includes("..")) {
+          // Check for suspicious patterns (phishing detection)
+          const suspiciousPatterns = [
+            {
+              pattern:
+                /https?:\/\/(?!www\.)(.*\.)?(paypal|ebay|amazon|bankofamerica|wellsfargo|chase)\./,
+              message: "Suspicious domain mimicking known brand",
+            },
+            {
+              pattern: /@/,
+              message:
+                "URL contains '@' character - often used in phishing attempts",
+            },
+            {
+              pattern: /\.(tk|ml|ga|cf|gq)$/,
+              message:
+                "URL uses free domain extension often associated with malicious sites",
+            },
+            {
+              pattern: /https?:\/\/[^\/]+\/login\.php/,
+              message: "Generic login page - could be phishing",
+            },
+            {
+              pattern: /https?:\/\/[^\/]+\/[a-f0-9]{16,}/,
+              message:
+                "Long hexadecimal strings in path - could be obfuscation",
+            },
+          ];
+
+          const detectedPatterns = [];
+          for (const { pattern, message } of suspiciousPatterns) {
+            if (pattern.test(url)) {
+              detectedPatterns.push(message);
+            }
+          }
+
+          // If suspicious patterns detected
+          if (detectedPatterns.length > 0) {
             return {
               isValid: false,
-              message: "Suspicious URL pattern detected",
-              details: ["URL contains potentially dangerous patterns"],
+              message: "Potential phishing URL detected",
+              details: detectedPatterns,
+              isSuspicious: true,
             };
           }
 
           // If all checks pass
           return {
             isValid: true,
-            message: "This URL appears to be valid",
+            message: "This URL appears to be valid and safe",
             parsedURL: {
               protocol: urlObj.protocol,
               host: urlObj.host,
@@ -600,6 +1349,8 @@
               "https://stackoverflow.com",
             ],
             invalid: "htt://www.invalid.com",
+            explanation:
+              "The invalid URL uses 'htt://' instead of 'http://' or 'https://'",
           },
           {
             valid: [
@@ -608,6 +1359,8 @@
               "https://www.linkedin.com",
             ],
             invalid: "https://www.invalid.123",
+            explanation:
+              "The invalid URL uses '.123' which is not a valid top-level domain",
           },
           {
             valid: [
@@ -616,6 +1369,8 @@
               "https://www.ebay.com",
             ],
             invalid: "https://www.invalid-.com",
+            explanation:
+              "The invalid URL contains a hyphen at the end of the subdomain",
           },
           {
             valid: [
@@ -624,6 +1379,8 @@
               "https://www.pinterest.com",
             ],
             invalid: "https://www.invalid space.com",
+            explanation:
+              "The invalid URL contains a space which is not allowed in URLs",
           },
           {
             valid: [
@@ -632,6 +1389,8 @@
               "https://www.adobe.com",
             ],
             invalid: "https://www.invalid@character.com",
+            explanation:
+              "The invalid URL contains an '@' character outside of the userinfo section",
           },
         ],
         medium: [
@@ -642,6 +1401,8 @@
               "https://user:pass@example.com",
             ],
             invalid: "https://..example.com",
+            explanation:
+              "The invalid URL contains consecutive dots in the domain",
           },
           {
             valid: [
@@ -650,6 +1411,8 @@
               "https://example.com/path/to/page",
             ],
             invalid: "https://example.com/../invalid",
+            explanation:
+              "The invalid URL uses '..' to traverse directories which can be suspicious",
           },
           {
             valid: [
@@ -658,6 +1421,8 @@
               "ftp://example.com",
             ],
             invalid: "https://example.com:65536",
+            explanation:
+              "The invalid URL uses port 65536 which is outside the valid port range (0-65535)",
           },
           {
             valid: [
@@ -666,6 +1431,8 @@
               "https://localhost:3000",
             ],
             invalid: "https://256.256.256.256",
+            explanation:
+              "The invalid URL uses an IP address with octets outside the valid range (0-255)",
           },
           {
             valid: [
@@ -674,6 +1441,8 @@
               "https://sub.sub.example.com",
             ],
             invalid: "https://example.-com.com",
+            explanation:
+              "The invalid URL contains a hyphen at the beginning of a domain part",
           },
         ],
         hard: [
@@ -684,6 +1453,8 @@
               "https://пример.тест",
             ],
             invalid: "https://example.com/\\x00",
+            explanation:
+              "The invalid URL contains a null character which can be used in injection attacks",
           },
           {
             valid: [
@@ -692,6 +1463,7 @@
               "https://example.com/?a=1&b=2",
             ],
             invalid: "https://example.com/?a=script>alert('xss')</script",
+            explanation: "The invalid URL contains potential XSS attack code",
           },
           {
             valid: [
@@ -700,6 +1472,8 @@
               "https://[2001:db8::1]",
             ],
             invalid: "https://[2001:db8:::1]",
+            explanation:
+              "The invalid URL contains an invalid IPv6 address with consecutive colons",
           },
           {
             valid: [
@@ -708,6 +1482,8 @@
               "https://example.com:0",
             ],
             invalid: "https://example.com:99999",
+            explanation:
+              "The invalid URL uses a port number outside the valid range",
           },
           {
             valid: [
@@ -716,18 +1492,34 @@
               "https://example.com/?very=long&query=string&with=many=parameters",
             ],
             invalid: "https://example.com/" + "a".repeat(10000),
+            explanation:
+              "The invalid URL is excessively long which can be used in buffer overflow attacks",
           },
         ],
       };
 
-      // Game state
-      let gameState = {
-        difficulty: "easy",
-        currentStage: 0,
-        score: 0,
-        startTime: 0,
-        timerInterval: null,
-        currentTime: 0,
+      // Application state
+      let appState = {
+        currentTab: "checker",
+        scanHistory: [],
+        gameState: {
+          difficulty: "easy",
+          currentStage: 0,
+          score: 0,
+          startTime: 0,
+          timerInterval: null,
+          currentTime: 0,
+        },
+        userProfile: {
+          username: "Cyber Defender",
+          level: 5,
+          streak: 12,
+          accuracy: 85,
+          scans: 47,
+          games: 36,
+          successRate: 92,
+          badges: ["first-scan", "phishing-expert"],
+        },
       };
 
       // DOM elements
@@ -736,6 +1528,7 @@
       const urlInput = document.getElementById("url-input");
       const validateBtn = document.getElementById("validate-btn");
       const validationResult = document.getElementById("validation-result");
+      const scanHistoryElement = document.getElementById("scan-history");
       const startScreen = document.getElementById("game-area");
       const startBtn = document.getElementById("start-btn");
       const restartBtn = document.getElementById("restart-btn");
@@ -748,6 +1541,7 @@
       const timerElement = document.getElementById("timer");
       const progressElement = document.getElementById("progress");
       const difficultyBtns = document.querySelectorAll(".difficulty-btn");
+      const notification = document.getElementById("notification");
 
       // Initialize application
       function initApp() {
@@ -766,6 +1560,9 @@
               content.classList.remove("active")
             );
             document.getElementById(tab).classList.add("active");
+
+            // Update app state
+            appState.currentTab = tab;
           });
         });
 
@@ -777,6 +1574,16 @@
 
         // Set up game
         initGame();
+
+        // Load initial data
+        loadScanHistory();
+        updateLeaderboard();
+
+        // Show welcome notification
+        showNotification(
+          "Welcome to URL Guardian! Start by checking a URL or playing the game.",
+          "info"
+        );
       }
 
       // Validate URL function
@@ -786,22 +1593,50 @@
 
         const result = validateURL(url);
         showValidationResult(result);
+
+        // Add to history
+        addToScanHistory(url, result);
+
+        // Update UI
+        loadScanHistory();
+
+        // Show notification
+        if (result.isValid && !result.isSuspicious) {
+          showNotification("URL is valid and safe!", "success");
+        } else if (result.isSuspicious) {
+          showNotification(
+            "Warning: Potential phishing URL detected!",
+            "error"
+          );
+        } else {
+          showNotification("URL is invalid.", "error");
+        }
       }
 
       // Show validation result
       function showValidationResult(result) {
         validationResult.className = "result-box";
-        validationResult.classList.add(result.isValid ? "valid" : "invalid");
+        validationResult.classList.add(
+          result.isValid && !result.isSuspicious ? "valid" : "invalid"
+        );
         validationResult.classList.remove("hidden");
 
         validationResult.innerHTML = `
                 <div class="result-icon">
                     <i class="fas ${
-                      result.isValid ? "fa-check-circle" : "fa-times-circle"
+                      result.isValid && !result.isSuspicious
+                        ? "fa-check-circle"
+                        : "fa-exclamation-triangle"
                     }"></i>
                 </div>
                 <div class="result-text">
-                    <h4>${result.isValid ? "Valid URL" : "Invalid URL"}</h4>
+                    <h4>${
+                      result.isValid && !result.isSuspicious
+                        ? "Valid URL"
+                        : result.isSuspicious
+                        ? "Suspicious URL"
+                        : "Invalid URL"
+                    }</h4>
                     <p>${result.message}</p>
                     ${
                       result.details
@@ -835,6 +1670,104 @@
             `;
       }
 
+      // Add URL to scan history
+      function addToScanHistory(url, result) {
+        appState.scanHistory.unshift({
+          url,
+          timestamp: new Date(),
+          result,
+        });
+
+        // Keep only last 10 scans
+        if (appState.scanHistory.length > 10) {
+          appState.scanHistory.pop();
+        }
+
+        // Update user profile
+        appState.userProfile.scans++;
+      }
+
+      // Load scan history
+      function loadScanHistory() {
+        if (appState.scanHistory.length === 0) {
+          scanHistoryElement.innerHTML =
+            '<p class="text-center">No scan history yet. URLs you scan will appear here.</p>';
+          return;
+        }
+
+        scanHistoryElement.innerHTML = "";
+        appState.scanHistory.forEach((scan) => {
+          const scanElement = document.createElement("div");
+          scanElement.className = "result-box";
+          scanElement.classList.add(
+            scan.result.isValid && !scan.result.isSuspicious
+              ? "valid"
+              : "invalid"
+          );
+          scanElement.style.marginBottom = "10px";
+          scanElement.style.padding = "10px";
+
+          scanElement.innerHTML = `
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <div style="font-weight: bold; max-width: 70%; overflow: hidden; text-overflow: ellipsis;">${
+                          scan.url
+                        }</div>
+                        <div style="font-size: 0.9rem; color: #7f8c8d;">${formatTime(
+                          scan.timestamp
+                        )}</div>
+                    </div>
+                `;
+
+          scanHistoryElement.appendChild(scanElement);
+        });
+      }
+
+      // Format time for display
+      function formatTime(date) {
+        return date.toLocaleTimeString([], {
+          hour: "2-digit",
+          minute: "2-digit",
+        });
+      }
+
+      // Show notification
+      function showNotification(message, type) {
+        notification.textContent = message;
+        notification.className = `notification ${type}`;
+        notification.classList.add("show");
+
+        setTimeout(() => {
+          notification.classList.remove("show");
+        }, 3000);
+      }
+
+      // Update leaderboard
+      function updateLeaderboard() {
+        const leaderboardBody = document.getElementById("leaderboard-body");
+        // For demo purposes, we'll use mock data
+        const mockData = [
+          { name: "CyberHero", level: "Hard", score: 12500 },
+          { name: "URLMaster", level: "Medium", score: 9800 },
+          { name: "PhishBuster", level: "Hard", score: 15200 },
+          { name: "SecureSam", level: "Easy", score: 7200 },
+          { name: "You", level: "Medium", score: 6400 },
+        ];
+
+        leaderboardBody.innerHTML = "";
+        mockData.forEach((player) => {
+          const row = document.createElement("tr");
+          row.style.borderBottom = "1px solid #eee";
+          row.innerHTML = `
+                    <td style="padding: 10px;">${player.name}</td>
+                    <td style="text-align: center; padding: 10px;">${
+                      player.level
+                    }</td>
+                    <td style="text-align: right; padding: 10px;">${player.score.toLocaleString()}</td>
+                `;
+          leaderboardBody.appendChild(row);
+        });
+      }
+
       // Initialize game
       function initGame() {
         // Set up event listeners
@@ -847,7 +1780,7 @@
           btn.addEventListener("click", () => {
             difficultyBtns.forEach((b) => b.classList.remove("active"));
             btn.classList.add("active");
-            gameState.difficulty = btn.dataset.difficulty;
+            appState.gameState.difficulty = btn.dataset.difficulty;
           });
         });
       }
@@ -858,8 +1791,8 @@
         document.querySelector(".difficulty-btns").classList.add("hidden");
         startScreen.classList.remove("hidden");
 
-        gameState.currentStage = 0;
-        gameState.score = 0;
+        appState.gameState.currentStage = 0;
+        appState.gameState.score = 0;
         updateUI();
 
         loadStage();
@@ -868,7 +1801,9 @@
       // Load current stage
       function loadStage() {
         const stageData =
-          gameData[gameState.difficulty][gameState.currentStage];
+          gameData[appState.gameState.difficulty][
+            appState.gameState.currentStage
+          ];
         const allUrls = [...stageData.valid, stageData.invalid];
 
         // Shuffle URLs
@@ -883,7 +1818,7 @@
           urlElement.classList.add("url-option");
           urlElement.textContent = url;
           urlElement.addEventListener("click", () =>
-            checkAnswer(url, urlElement)
+            checkAnswer(url, urlElement, stageData.explanation)
           );
           urlContainer.appendChild(urlElement);
         });
@@ -900,9 +1835,11 @@
       }
 
       // Check if answer is correct
-      function checkAnswer(url, element) {
+      function checkAnswer(url, element, explanation) {
         const stageData =
-          gameData[gameState.difficulty][gameState.currentStage];
+          gameData[appState.gameState.difficulty][
+            appState.gameState.currentStage
+          ];
         const isInvalid = url === stageData.invalid;
 
         // Stop timer
@@ -910,14 +1847,17 @@
 
         if (isInvalid) {
           // Correct answer
-          const timeTaken = gameState.currentTime;
+          const timeTaken = appState.gameState.currentTime;
           const points = calculatePoints(timeTaken);
-          gameState.score += points;
+          appState.gameState.score += points;
 
           element.style.borderColor = "var(--success)";
           element.style.background = "#e8f5e9";
-          resultElement.textContent = `Correct! +${points} points`;
+          resultElement.innerHTML = `Correct! +${points} points<br><small>${explanation}</small>`;
           resultElement.className = "result correct";
+
+          // Update user profile
+          appState.userProfile.games++;
         } else {
           // Incorrect answer
           element.style.borderColor = "var(--danger)";
@@ -932,12 +1872,12 @@
             }
           });
 
-          resultElement.textContent = "Incorrect! The URL above is invalid";
+          resultElement.innerHTML = `Incorrect!<br><small>${explanation}</small>`;
           resultElement.className = "result incorrect";
         }
 
         // Show next button or finish game
-        if (gameState.currentStage < 4) {
+        if (appState.gameState.currentStage < 4) {
           nextBtn.classList.remove("hidden");
         } else {
           nextBtn.textContent = "See Results";
@@ -945,6 +1885,7 @@
         }
 
         updateUI();
+        updateLeaderboard();
       }
 
       // Calculate points based on time taken
@@ -953,20 +1894,20 @@
         let points = Math.max(maxPoints - timeTaken * 20, 100);
 
         // Adjust points based on difficulty
-        if (gameState.difficulty === "medium") points *= 1.5;
-        if (gameState.difficulty === "hard") points *= 2;
+        if (appState.gameState.difficulty === "medium") points *= 1.5;
+        if (appState.gameState.difficulty === "hard") points *= 2;
 
         return Math.round(points);
       }
 
       // Move to next stage
       function nextStage() {
-        if (gameState.currentStage < 4) {
-          gameState.currentStage++;
+        if (appState.gameState.currentStage < 4) {
+          appState.gameState.currentStage++;
           loadStage();
         } else {
           // Game finished
-          resultElement.textContent = `Game Over! Final Score: ${gameState.score}`;
+          resultElement.textContent = `Game Over! Final Score: ${appState.gameState.score}`;
           resultElement.className = "result";
           nextBtn.classList.add("hidden");
 
@@ -975,6 +1916,12 @@
           urlElements.forEach((el) => {
             el.style.pointerEvents = "none";
           });
+
+          // Show notification
+          showNotification(
+            `Congratulations! You scored ${appState.gameState.score} points.`,
+            "success"
+          );
         }
       }
 
@@ -988,27 +1935,29 @@
 
       // Start timer
       function startTimer() {
-        gameState.startTime = Date.now();
-        gameState.currentTime = 0;
+        appState.gameState.startTime = Date.now();
+        appState.gameState.currentTime = 0;
         timerElement.textContent = "0";
 
-        if (gameState.timerInterval) clearInterval(gameState.timerInterval);
+        if (appState.gameState.timerInterval)
+          clearInterval(appState.gameState.timerInterval);
 
-        gameState.timerInterval = setInterval(() => {
-          gameState.currentTime = (Date.now() - gameState.startTime) / 1000;
-          timerElement.textContent = gameState.currentTime.toFixed(1);
+        appState.gameState.timerInterval = setInterval(() => {
+          appState.gameState.currentTime =
+            (Date.now() - appState.gameState.startTime) / 1000;
+          timerElement.textContent = appState.gameState.currentTime.toFixed(1);
 
           // Update progress bar (max 15 seconds per question)
           const progressPercent = Math.min(
-            (gameState.currentTime / 15) * 100,
+            (appState.gameState.currentTime / 15) * 100,
             100
           );
           progressElement.style.width = `${progressPercent}%`;
 
           // Change color when time is running out
-          if (gameState.currentTime > 10) {
+          if (appState.gameState.currentTime > 10) {
             progressElement.style.background = "var(--danger)";
-          } else if (gameState.currentTime > 5) {
+          } else if (appState.gameState.currentTime > 5) {
             progressElement.style.background = "var(--warning)";
           }
         }, 100);
@@ -1016,19 +1965,19 @@
 
       // Stop timer
       function stopTimer() {
-        if (gameState.timerInterval) {
-          clearInterval(gameState.timerInterval);
-          gameState.timerInterval = null;
+        if (appState.gameState.timerInterval) {
+          clearInterval(appState.gameState.timerInterval);
+          appState.gameState.timerInterval = null;
         }
       }
 
       // Update UI elements
       function updateUI() {
-        scoreElement.textContent = gameState.score;
+        scoreElement.textContent = appState.gameState.score;
         levelElement.textContent =
-          gameState.difficulty.charAt(0).toUpperCase() +
-          gameState.difficulty.slice(1);
-        stageElement.textContent = `${gameState.currentStage + 1}/5`;
+          appState.gameState.difficulty.charAt(0).toUpperCase() +
+          appState.gameState.difficulty.slice(1);
+        stageElement.textContent = `${appState.gameState.currentStage + 1}/5`;
       }
 
       // Utility function to shuffle array
