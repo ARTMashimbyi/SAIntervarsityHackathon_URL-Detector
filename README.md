@@ -1,150 +1,165 @@
-# South African Intervarsity Hackathon Submission Template - 2025
+URL Guardian - README
+📋 Project Overview
+URL Guardian is an interactive web application designed to educate users about cybersecurity threats, particularly phishing attacks and malicious URLs. It combines practical tools with educational content to help users identify and avoid online threats.
 
-Welcome to the official **Hackathon Submission Template** for the **South African Intervarsity Hackathon 2025**! This repository is designed to help participants organize their project submissions in a **consistent, judge-friendly structure** while supporting any tech stack.
+✨ Features
+🔍 URL Validation Tool: Analyze URLs for security risks and potential phishing attempts
 
----
+🎮 Phishing Detection Game: Test your skills at identifying malicious URLs in a timed game
 
-## 📂 Repository Structure
-```
-├── assets/
-│   └── README.md
-├── demo/
-│   ├── OVERVIEW.md
-│   └── README.md
-├── docs/
-│   ├── ACKNOWLEDGEMENTS.md
-│   ├── SETUP.md
-│   ├── TEAM.md
-│   └── USAGE.md
-├── scripts/
-│   └── README.md
-├── src/
-│   └── README.md
-├── vendor/
-│   └── README.md
-├── .dockerignore
-├── .editorconfig
-├── .gitattributes
-├── .gitignore
-├── Dockerfile
-├── LICENSE
-└── README.md
-```
----
+📚 Learning Center: Educational modules on phishing, social engineering, and secure browsing
 
-### 🔹 Description of Each Folder/File
+📊 User Profile & Progress Tracking: Monitor your learning progress and achievements
 
-- **assets/**  
-    All assets used by your project such as **images**, **audio files**, **3D models**, **datasets** and so-on, should be placed in this folder.
+🏆 Leaderboard: Compete with others for the highest scores
 
-- **demo/**  
-    Your **demo video**, **PowerPoint presentation**, **Overview readme doc** and or any **examples** should be placed in this folder.
+🛠️ Technologies Used
+Frontend: HTML5, CSS3, JavaScript (ES6+)
 
-- **docs/**  
-    Contains essential documentation about your team and project (these must be written by you):
-    - `ACKNOWLEDGEMENTS.md` → References all third-party libraries and sources used
-    - `SETUP.md` → Instructions for installing dependencies and running the project  
-    - `TEAM.md` → Team member names, roles, and contact info  
-    - `USAGE.md` → Instructions for using or testing the project 
+Icons: Font Awesome 6.4.0
 
-- **scripts/**  
-    All **utility**, **automation** and **project-management** scripts should be placed in this folder.
+Storage: Local Storage for saving user data
 
-- **src/**  
-    All source code files should be placed in this folder. You may organize this folder as needed (e.g., `backend/`, `frontend/`, `lib/`, `source/` and or `include/` folders and so on).
+Styling: CSS Grid, Flexbox, CSS Variables
 
-- **vendor/**  
-    All third-party libraries, code and or submodules should be placed in this folder along **with the appropriate licensing and or references**. If you are not able to link the modules from this folder to your codebase properly, you may put the third-party modules inside the `src/` folder with the rest of your code however, it **must be made clear** which modules are **third-party**, along with their **licensing**.
-    Since many tech-stacks already use package managers, this `vendor/` folder is for self-included libraries, dependencies and submodules. **Auto-generated** dependency folders like `node_modules/` or `nuget/` should ideally be ignored by `.gitignore`.
+📁 Project Structure
+text
+src/
+├── index.html # Main HTML file
+├── style.css # All CSS styles
+└── script.js # All JavaScript functionality
+🚀 Local Setup
+Prerequisites
+A modern web browser (Chrome, Firefox, Safari, Edge)
 
-- **.dockerignore**  
-    Excludes build artifacts and other non-essential files from the Docker image. *You may delete this file if you do not plan on using Docker.*
+A code editor (VS Code, Sublime Text, etc.)
 
-- **.editorconfig**  
-    Standardizes indentation, line endings, and character encoding across editors and platforms. It is **highly recommended** that you use a text editor/IDE that supports **.editorconfig**.
+Live Server extension (for VS Code) or similar local server tool
 
-- **.gitattributes**  
-    Ensures consistent handling of line endings, text, and binary files across different operating systems.
+Installation Steps
+Download or clone the project files
 
-- **.gitignore**  
-    Ignores build artifacts, OS files, IDE configs, and other non-essential files to keep the repository clean.
+bash
 
-- **Dockerfile**  
-    A "quick start" template **Dockerfile** to serve as a blueprint for containerizing your project in a **Docker image**. *You may delete this file if you do not plan on using Docker.*
+# If using git
 
-- **LICENSE**  
-    Default license template for your submission (MIT recommended).
-    *You must add the names of your team members to this template.*
+git clone <https://github.com/ARTMashimbyi/SAIntervarsityHackathon_URL-Detector.git>
+cd url-guardian
+Organize the files
 
-- **README.md**  
-    Hey wait, that's me!
+Place all three files (index.html, style.css, script.js) in the same directory (src folder)
 
----
+Run with Live Server
 
-## ✅ Submission Guidelines
+If using VS Code, install the "Live Server" extension by Ritwick Dey
 
-1. Create your project's repo off of this template (click the `Use this template` button).  
-2. Fill in the `TEAM.md` file with your team members’ information. 
-3. Start hacking!
-4. Fill in `ACKNOWLEDGEMENTS.md`, `OVERVIEW.md`, `SETUP.md`, `USAGE.md` and `LICENSE`. 
-5. Link or include your demo video & PowerPoint in the `demo/` folder.  
-6. **Optional:** Include additional documentation and design notes in `docs/`.
-7. **Optional:** Include unit tests in `tests/`.
-8. Submit the link to your **public GitHub repository**.
+Right-click on index.html and select "Open with Live Server"
 
----
+The application will open in your default browser at http://127.0.0.1:5500/src/index.html
 
-## 📑 Documentation Checklist
+Alternative method: Use Python simple server
 
-| File                  | Required? | Notes                                                          |
-| --------------------- | --------- | -------------------------------------------------------------- |
-| `TEAM.md`             | ✅         | Must list all team members, their roles, and institutions      |
-| `OVERVIEW.md`         | ✅         | High-level description of your project and its purpose         |
-| `SETUP.md`            | ✅         | Instructions to install dependencies and run the project       |
-| `USAGE.md`            | ✅         | How to use/test the project after setup                        |
-| `ACKNOWLEDGEMENTS.md` | ✅         | Credit all third-party libraries, datasets, and resources used |
-| `LICENSE`             | ✅         | Include license type and add your team members’ names          |
-| `tests/`              | Optional  | Add test scripts or instructions if relevant                   |
-| `Dockerfile`          | Optional  | Only if you choose to containerize your project                |
-| Extra docs            | Optional  | Additional guides, design notes, or API references             |
+bash
 
----
+# Navigate to the src directory
 
-## 📌 Tips & Other Remarks
+cd src
 
-- Keep your code and assets organized within the `src/` and `assets/` directories.  
-- Use `.editorconfig` and `.gitattributes` to avoid formatting and line-ending issues.  
-- Follow the folder structure strictly — it will make judging smoother and faster.  
-- It is highly recommended that you use **Docker** for your submission however, it is **not required**. If you opt to **not** use **Docker**, please ensure that your setup instructions in `SETUP.md` are **straightforward**, **correct**, **comprehensive** and **cross-platform** (if applicable) to ensure that your submission will be graded properly.
-- It is also recommended that you work with a **tech-stack** or **build-system** that is **platform-agnostic**. For example: if your project is written in `C++` - which is **platform-dependent**, you may need to ensure that it compiles correctly accross multiple toolchains/compilers for different platforms, thereby creating the added-complexity of having to maintain multiple build-targets - such as having to support both **MSVC for Windows** (using `WIN32` for OS-calls) and **GCC for Linux** (using `POSIX` for OS-calls). However, using a language like `Java` may work much better, since `Java` code is inherently **platform-agnostic** as it runs on a *virtual machine* which abstracts away the lower-level OS-calls.
----
+🎯 How to Use
+URL Checker Tab
+Enter a URL in the input field
 
-### 💡 Note for First-Time Hackathon Participants
-If this is your **first hackathon** or you’re **new to GitHub**, don’t stress — just:  
-1. Use this template repo as-is.  
-2. Fill in the required documentation files (`TEAM.md`, `OVERVIEW.md`, `SETUP.md`, `USAGE.md`, `ACKNOWLEDGEMENTS.md`, `LICENSE`).  
-3. Put your code in the `src/` folder and assets in `assets/`.  
+Click "Analyze URL" to check for security issues
 
-That’s enough for a complete and valid submission 🚀 — the rest (like Docker, tests, extra docs) is **optional polish**.
+View the results showing whether the URL is safe, suspicious, or invalid
 
----
+Check your scan history below
 
-## 🧩 Example Submission
-Check out a very basic example submission repository [here](https://github.com/DnA-IntRicate/SAIntervarsityHackathonExampleSubmission2025).
+Phishing Game Tab
+Select a difficulty level (Easy, Medium, Hard)
 
-We've also created a **demo video** showcasing the **example submission** and how to get started with this **template repository**, check it out [here](https://youtu.be/e2R9APyatU4).
+Click "START GAME"
 
----
+Identify the phishing URL among the options as quickly as possible
 
-## 🙌 Brought to you by
-- [UCT Developer Society](https://www.linkedin.com/company/uct-developers-society)
-- [UCT AI Society](https://www.linkedin.com/company/uctaisociety/)
-- Stellenbosch AI Society
-- [Wits Developer Society](https://www.linkedin.com/company/wits-developer-society/)
-- [UJ Developer Society](https://www.linkedin.com/company/uj-developerss-society/)
-- [UWC IT Society](https://www.linkedin.com/company/uwc-it-society/)
-- [UNISA Developer Society](https://www.linkedin.com/company/unisa-developer-society/)
+Earn points based on speed and accuracy
 
-![Sponsored by](assets/Sponsors.jpg)
+Complete all 5 stages to finish the game
 
-### **Good luck and happy hacking!** 🚀
+Learning Center Tab
+Browse through different cybersecurity modules
+
+Click on any module to view detailed educational content
+
+Complete the daily challenge to test your knowledge
+
+Track your progress through module completion indicators
+
+Profile Tab
+View your statistics and achievements
+
+Check your weekly activity
+
+See which badges you've earned and which are still locked
+
+🔧 Customization
+You can customize the application by:
+
+Modifying CSS variables in the :root section of style.css to change the color scheme
+
+Adding new game levels by extending the gameData object in script.js
+
+Creating new learning modules by adding to the learningContent object
+
+Adjusting validation rules in the validateURL function
+
+📝 Key Functions
+validateURL(url) - Analyzes URLs for security issues
+
+checkHomographAttack(hostname) - Detects homograph attacks
+
+calculateSimilarity(str1, str2) - Measures similarity between strings
+
+initGame() - Sets up the phishing detection game
+
+showModule(moduleId) - Displays educational content
+
+saveToLocalStorage() - Persists user data
+
+🌐 Browser Compatibility
+This application works on all modern browsers including:
+
+Chrome 60+
+
+Firefox 55+
+
+Safari 12+
+
+Edge 79+
+
+📊 Data Storage
+The application uses the browser's Local Storage to save:
+
+User scan history
+
+Game scores and progress
+
+Learning module completion status
+
+User profile information
+
+No data is sent to external servers - everything is stored locally in your browser.
+
+🐛 Troubleshooting
+If you encounter issues:
+
+Clear your browser cache if the application doesn't load properly
+
+Check the console (F12) for any JavaScript errors
+
+Ensure all files are in the same directory
+
+Make sure you're using a local server (not opening the HTML file directly)
+
+📄 License
+This project is for educational purposes. Feel free to modify and use as needed.
