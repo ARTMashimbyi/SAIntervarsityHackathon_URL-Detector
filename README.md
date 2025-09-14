@@ -163,3 +163,4 @@ Make sure you're using a local server (not opening the HTML file directly)
 
 📄 License
 This project is for educational purposes. Feel free to modify and use as needed.
+
